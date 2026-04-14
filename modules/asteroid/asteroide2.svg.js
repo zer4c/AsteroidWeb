@@ -1,10 +1,18 @@
-class Asteroide2 {
-  constructor(ctx, escala) {
+class Asteroide2SVG {
+  constructor(ctx, escala, x, y) {
     this.ctx = ctx;
     this.escala = escala;
+    this.x = x;
+    this.y = y;
   }
-  dibujar(x, y) {
-    const { ctx, escala } = this;
+
+  actualizar(velocidadX, velocidadY) {
+    this.x += velocidadX;
+    this.y += velocidadY;
+  }
+
+  dibujar() {
+    const { ctx, escala, x, y } = this;
     ctx.save();
     ctx.translate(x, y);
     ctx.scale(escala, escala);
