@@ -2,13 +2,21 @@ class Asteroide2SVG {
   constructor(ctx, escala, x, y) {
     this.ctx = ctx;
     this.escala = escala;
-    this.x = x;
-    this.y = y;
+    this._x = x;
+    this._y = y;
+  }
+
+  get x() {
+    return this._x;
+  }
+
+  get y() {
+    return this._y;
   }
 
   actualizar(velocidadX, velocidadY) {
-    this.x += velocidadX;
-    this.y += velocidadY;
+    this._x += velocidadX;
+    this._y += velocidadY;
   }
 
   dibujar() {
@@ -18,24 +26,24 @@ class Asteroide2SVG {
     ctx.scale(escala, escala);
 
     ctx.beginPath();
-    ctx.moveTo(x + 5, y + 10);
-    ctx.lineTo(x - 28, y - 62);
-    ctx.lineTo(x - 17, y - 55);
-    ctx.lineTo(x + 13, y - 82);
-    ctx.lineTo(x + 43, y - 57);
-    ctx.lineTo(x + 62, y - 45);
-    ctx.lineTo(x + 50, y - 5);
-    ctx.lineTo(x + 38, y - 15);
-    ctx.lineTo(x + 25, y + 13);
+    ctx.moveTo(5, 10);
+    ctx.lineTo(-28, -62);
+    ctx.lineTo(-17, -55);
+    ctx.lineTo(13, -82);
+    ctx.lineTo(43, -57);
+    ctx.lineTo(62, -45);
+    ctx.lineTo(50, -5);
+    ctx.lineTo(38, -15);
+    ctx.lineTo(25, 13);
     ctx.closePath();
     ctx.strokeStyle = "white";
     ctx.stroke();
 
     ctx.beginPath();
-    ctx.moveTo(x - 1.2, y - 15.0); 
-    ctx.lineTo(x + 38.3, y - 15.0); 
-    ctx.lineTo(x + 38.3, y - 54.5); 
-    ctx.lineTo(x - 1.2, y - 54.5); 
+    ctx.moveTo(-1.2, -15.0);
+    ctx.lineTo(38.3, -15.0);
+    ctx.lineTo(38.3, -54.5);
+    ctx.lineTo(-1.2, -54.5);
     ctx.closePath();
     ctx.strokeStyle = "white";
     ctx.stroke();

@@ -6,14 +6,32 @@ class AsteroideController {
   }
 
   parametrosAleatorios() {
-    const mitadX = this.canvas.width / 2;
-    const mitadY = this.canvas.height / 2;
+    const margen = 0.1;
+    const minX = this.canvas.width * margen;
+    const maxX = this.canvas.width * (1 - margen);
+    const minY = this.canvas.height * margen;
+    const maxY = this.canvas.height * (1 - margen);
 
-    const x = Math.random() * this.canvas.width;
-    const y = Math.random() * this.canvas.height;
+    let x;
+    let y;
+    if (Math.random() < 0.5) {
+      x =
+        Math.random() < 0.5
+          ? Math.random() * minX
+          : maxX + Math.random() * (this.canvas.width - maxX);
+      y = Math.random() * this.canvas.height;
+    } else {
+      x = Math.random() * this.canvas.width;
+      y =
+        Math.random() < 0.5
+          ? Math.random() * minY
+          : maxY + Math.random() * (this.canvas.height - maxY);
+    }
 
-    const vx = x < mitadX ? Math.random() * 5 : Math.random() * -5;
-    const vy = y <= mitadY ? Math.random() * 5 : Math.random() * -5;
+    const vx =
+      x < this.canvas.width / 2 ? Math.random() * 5 : Math.random() * -5;
+    const vy =
+      y <= this.canvas.height / 2 ? Math.random() * 5 : Math.random() * -5;
 
     return { x, y, vx, vy };
   }
@@ -58,11 +76,27 @@ class AsteroideController {
     return true;
   }
 
+  estaFueraPantalla(asteroide) {
+    const margen = 100;
+    return (
+      asteroide.x < -margen ||
+      asteroide.x > this.canvas.width + margen ||
+      asteroide.y < -margen ||
+      asteroide.y > this.canvas.height + margen
+    );
+  }
+
   moverAsteroides() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.asteroides.forEach((asteroide) => {
+    this.asteroides.forEach((asteroide, indice) => {
       if (asteroide === null) return;
+
       asteroide.actualizar(asteroide.vx, asteroide.vy);
+      if (this.estaFueraPantalla(asteroide)) {
+        this.eliminarAsteroide(indice);
+        return;
+      }
+
       asteroide.dibujar();
     });
   }
