@@ -4,25 +4,42 @@ class Nave {
         this.ctx = this.canvas.getContext("2d");
 
         this.ajustarPantalla();
+        this.teclas = {};
+        this.movimiento = 8;
+        
+        window.addEventListener("resize", () => this.ajustarPantalla());
+        window.addEventListener("keydown", (e) => this.teclas[e.key] = true);
+        window.addEventListener("keyup", (e) => this.teclas[e.key] = false);
 
-        window.addEventListener("resize", () => {
-            this.ajustarPantalla();
-            this.dibujar();
-        });
     }
-
     ajustarPantalla() {
         this.canvas.width  = window.innerWidth;
         this.canvas.height = window.innerHeight;
         this.cx = this.canvas.width  / 2;
         this.cy = this.canvas.height / 2;
     }
+    actualizar(){
+        if(this.teclas["ArrowUp"] || this.teclas["W"]){
+            this.cy -= this.movimiento;
+        }
+        if(this.teclas["ArrowDown"] || this.teclas["S"]){
+            this.cy += this.movimiento;
+        }
+        if(this.teclas["ArrowLeft"] || this.teclas["A"]){
+            this.cx -= this.movimiento;
+        }
+        if(this.teclas["ArrowRight"] || this.teclas["D"]){
+            this.cx += this.movimiento;
+        }
+    }
+
+    
 
     dibujar() {
         const ctx = this.ctx;
         const cx  = this.cx;
         const cy  = this.cy;
-        const s   = 0.5; 
+        const s   = 0.3; 
 
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         ctx.strokeStyle = "white";
@@ -80,7 +97,16 @@ class Nave {
         ctx.closePath();
         ctx.stroke();
     }
+
+    iniciar(){
+        const loop = () => {
+            this.actualizar();
+            this.dibujar();
+            requestAnimationFrame(loop);
+        };
+        requestAnimationFrame(loop);
+    }
 }
 
 const nave =  new Nave("miCanvas");
-nave.dibujar();
+nave.iniciar();
