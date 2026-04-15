@@ -12,8 +12,8 @@ class AsteroideController {
     const x = Math.random() * this.canvas.width;
     const y = Math.random() * this.canvas.height;
 
-    const vx = x < mitadX ? Math.random() * 20 : Math.random() * -20;
-    const vy = y <= mitadY ? Math.random() * 20 : Math.random() * -20;
+    const vx = x < mitadX ? Math.random() * 5 : Math.random() * -5;
+    const vy = y <= mitadY ? Math.random() * 5 : Math.random() * -5;
 
     return { x, y, vx, vy };
   }
@@ -23,7 +23,15 @@ class AsteroideController {
     if (indice === -1) return false;
 
     const { x, y, vx, vy } = this.parametrosAleatorios();
-    this.asteroides[indice] = new AsteroideSVG(this.ctx, x, y, vx, vy);
+    const asteroide = new AsteroideSVG(
+      this.ctx,
+      Math.random() * 0.5 + 0.5,
+      x,
+      y,
+    );
+    asteroide.vx = vx;
+    asteroide.vy = vy;
+    this.asteroides[indice] = asteroide;
     return true;
   }
 
@@ -32,7 +40,15 @@ class AsteroideController {
     if (indice === -1) return false;
 
     const { x, y, vx, vy } = this.parametrosAleatorios();
-    this.asteroides[indice] = new Asteroide2SVG(this.ctx, x, y, vx, vy);
+    const asteroide = new Asteroide2SVG(
+      this.ctx,
+      Math.random() * 0.5 + 0.5,
+      x,
+      y,
+    );
+    asteroide.vx = vx;
+    asteroide.vy = vy;
+    this.asteroides[indice] = asteroide;
     return true;
   }
 
@@ -41,10 +57,12 @@ class AsteroideController {
     this.asteroides[indice] = null;
     return true;
   }
+
   moverAsteroides() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.asteroides.forEach((asteroide) => {
       if (asteroide === null) return;
-      asteroide.actualizar();
+      asteroide.actualizar(asteroide.vx, asteroide.vy);
       asteroide.dibujar();
     });
   }

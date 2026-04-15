@@ -30,5 +30,7 @@ class Asteroide2SVG {
     ctx.closePath();
     ctx.strokeStyle = "white";
     ctx.stroke();
+
+    ctx.restore();
   }
 }
