@@ -31,7 +31,7 @@ class ParticulaRectangularSVG {
 
     ctx.beginPath();
     ctx.rect(-10, -10, 20, 20);
-    ctx.strokeStyle = "yellow";
+    ctx.strokeStyle = "white";
     ctx.stroke();
 
     ctx.restore();

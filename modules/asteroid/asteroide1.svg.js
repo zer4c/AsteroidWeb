@@ -25,7 +25,7 @@ class AsteroideSVG {
     ctx.save();
     ctx.translate(x, y);
     ctx.scale(escala, escala);
-    ctx.rotate(this.rotacion * Math.PI / 180); // Aplicar rotación en radianes
+    ctx.rotate(this.rotacion * Math.PI / 180); 
 
     ctx.beginPath();
     ctx.moveTo(0, 0);
