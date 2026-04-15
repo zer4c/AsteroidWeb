@@ -1,9 +1,10 @@
 class AsteroideSVG {
-  constructor(ctx, escala, x, y) {
+  constructor(ctx, escala, x, y, rotacion) {
     this.ctx = ctx;
     this.escala = escala;
     this._x = x;
     this._y = y;
+    this.rotacion = rotacion;
   }
 
   get x() {
@@ -24,6 +25,7 @@ class AsteroideSVG {
     ctx.save();
     ctx.translate(x, y);
     ctx.scale(escala, escala);
+    ctx.rotate(this.rotacion * Math.PI / 180); // Aplicar rotación en radianes
 
     ctx.beginPath();
     ctx.moveTo(0, 0);

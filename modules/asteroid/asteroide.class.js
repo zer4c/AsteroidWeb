@@ -41,11 +41,13 @@ class AsteroideController {
     if (indice === -1) return false;
 
     const { x, y, vx, vy } = this.parametrosAleatorios();
+    const rotacion = Math.random() * 360;
     const asteroide = new AsteroideSVG(
       this.ctx,
       Math.random() * 0.5 + 0.5,
       x,
       y,
+      rotacion,
     );
     asteroide.vx = vx;
     asteroide.vy = vy;
@@ -58,11 +60,13 @@ class AsteroideController {
     if (indice === -1) return false;
 
     const { x, y, vx, vy } = this.parametrosAleatorios();
+    const rotacion = Math.random() * 360;
     const asteroide = new Asteroide2SVG(
       this.ctx,
       Math.random() * 0.5 + 0.5,
       x,
       y,
+      rotacion,
     );
     asteroide.vx = vx;
     asteroide.vy = vy;
