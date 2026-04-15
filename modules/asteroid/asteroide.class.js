@@ -1,8 +1,9 @@
 class AsteroideController {
-  constructor(ctx, canvas) {
+  constructor(ctx, canvas, particulasController) {
     this.asteroides = new Array(10).fill(null);
     this.ctx = ctx;
     this.canvas = canvas;
+    this.particulasController = particulasController;
   }
 
   parametrosAleatorios() {
@@ -90,6 +91,17 @@ class AsteroideController {
     );
   }
 
+  generarParticulas(asteroide) {
+    for (let i = 0; i < 5; i++) {
+      const velocidad = 100 + Math.random() * 100;
+      this.particulasController.crearParticulaRectangular(asteroide.x, asteroide.y, velocidad, asteroide.escala);
+    }
+    for (let i = 0; i < 5; i++) {
+      const velocidad = 100 + Math.random() * 100;
+      this.particulasController.crearParticulaRedonda(asteroide.x, asteroide.y, velocidad, asteroide.escala);
+    }
+  }
+
   moverAsteroides() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.asteroides.forEach((asteroide, indice) => {
@@ -97,6 +109,7 @@ class AsteroideController {
 
       asteroide.actualizar(asteroide.vx, asteroide.vy);
       if (this.estaFueraPantalla(asteroide)) {
+        this.generarParticulas(asteroide);
         this.eliminarAsteroide(indice);
         return;
       }

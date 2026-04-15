@@ -3,6 +3,7 @@ class PantallaJuego {
     this.canvas = document.getElementById("miCanvas");
     this.ctx = this.canvas.getContext("2d");
     this.controlador = null;
+    this.particulasController = null;
     this.intervaloGeneracion = null;
   }
 
@@ -17,7 +18,8 @@ class PantallaJuego {
   }
 
   iniciarJuego() {
-    this.controlador = new AsteroideController(this.ctx, this.canvas);
+    this.particulasController = new ParticulasController(this.ctx, this.canvas);
+    this.controlador = new AsteroideController(this.ctx, this.canvas, this.particulasController);
 
     this.intervaloGeneracion = setInterval(() => {
       this.intentarGenerarAsteroide(Math.random());
@@ -28,6 +30,7 @@ class PantallaJuego {
 
   bucleJuego() {
     this.controlador.moverAsteroides();
+    this.particulasController.moverParticulas();
     requestAnimationFrame(() => this.bucleJuego());
   }
 
