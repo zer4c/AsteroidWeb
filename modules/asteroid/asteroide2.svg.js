@@ -31,6 +31,15 @@ class Asteroide2SVG {
     ctx.strokeStyle = "white";
     ctx.stroke();
 
+    ctx.beginPath();
+    ctx.moveTo(x - 1.2, y - 15.0); 
+    ctx.lineTo(x + 38.3, y - 15.0); 
+    ctx.lineTo(x + 38.3, y - 54.5); 
+    ctx.lineTo(x - 1.2, y - 54.5); 
+    ctx.closePath();
+    ctx.strokeStyle = "white";
+    ctx.stroke();
+
     ctx.restore();
   }
 }
