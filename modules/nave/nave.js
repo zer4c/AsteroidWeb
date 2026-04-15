@@ -19,16 +19,16 @@ class Nave {
         this.cy = this.canvas.height / 2;
     }
     actualizar(){
-        if(this.teclas["ArrowUp"] || this.teclas["W"]){
+        if(this.teclas["ArrowUp"] || this.teclas["W"] || this.teclas["w"]){
             this.cy -= this.movimiento;
         }
-        if(this.teclas["ArrowDown"] || this.teclas["S"]){
+        if(this.teclas["ArrowDown"] || this.teclas["S"] || this.teclas["s"]){
             this.cy += this.movimiento;
         }
-        if(this.teclas["ArrowLeft"] || this.teclas["A"]){
+        if(this.teclas["ArrowLeft"] || this.teclas["A"] || this.teclas["a"]){
             this.cx -= this.movimiento;
         }
-        if(this.teclas["ArrowRight"] || this.teclas["D"]){
+        if(this.teclas["ArrowRight"] || this.teclas["D"] || this.teclas["d"]){
             this.cx += this.movimiento;
         }
     }
