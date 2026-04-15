@@ -18,12 +18,21 @@ class AsteroideController {
     return { x, y, vx, vy };
   }
 
-  crearAsteroide() {
+  crearAsteroide1() {
     const indice = this.asteroides.indexOf(null);
     if (indice === -1) return false;
 
     const { x, y, vx, vy } = this.parametrosAleatorios();
-    this.asteroides[indice] = new Asteroide(this.ctx, x, y, vx, vy);
+    this.asteroides[indice] = new AsteroideSVG(this.ctx, x, y, vx, vy);
+    return true;
+  }
+
+  crearAsteroide2() {
+    const indice = this.asteroides.indexOf(null);
+    if (indice === -1) return false;
+
+    const { x, y, vx, vy } = this.parametrosAleatorios();
+    this.asteroides[indice] = new Asteroide2SVG(this.ctx, x, y, vx, vy);
     return true;
   }
 
