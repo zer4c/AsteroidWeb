@@ -1,6 +1,6 @@
 class ParticulasController {
   constructor(ctx, canvas) {
-    this.particulas = new Array(10).fill(null);
+    this.particulas = new Array(50).fill(null);
     this.ctx = ctx;
     this.canvas = canvas;
     this.ultimoTiempo = Date.now();
@@ -26,7 +26,7 @@ class ParticulasController {
     const angulo = Math.random() * 2 * Math.PI;
     const vx = Math.cos(angulo) * velocidad;
     const vy = Math.sin(angulo) * velocidad;
-    const tiempoVida = 0.5;
+    const tiempoVida = 1;
 
     this.particulas[indice] = new ParticulaRedondaSVG(this.ctx, escala, x, y, vx, vy, tiempoVida);
     return true;

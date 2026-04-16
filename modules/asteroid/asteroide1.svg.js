@@ -14,6 +14,9 @@ class AsteroideSVG {
   get y() {
     return this._y;
   }
+  get radio() {
+    return this.escala * 30;
+  }
 
   actualizar(velocidadX, velocidadY) {
     this._x += velocidadX;
