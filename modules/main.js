@@ -1,2 +1,4 @@
-juego = new PantallaJuego();
-juego.iniciarJuego();
+//juego = new PantallaJuego();
+//uego.iniciarJuego();
+nave = new Nave("miCanvas");
+nave.iniciar();
