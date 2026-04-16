@@ -2,6 +2,7 @@ class PantallaJuego {
   constructor() {
     this.canvas = document.getElementById("miCanvas");
     this.ctx = this.canvas.getContext("2d");
+    this.nave = null;
     this.controlador = null;
     this.particulasController = null;
     this.intervaloGeneracion = null;
@@ -18,6 +19,7 @@ class PantallaJuego {
   }
 
   iniciarJuego() {
+    this.nave = new Nave(this.ctx, this.canvas);
     this.particulasController = new ParticulasController(this.ctx, this.canvas);
     this.controlador = new AsteroideController(this.ctx, this.canvas, this.particulasController);
 
@@ -29,6 +31,9 @@ class PantallaJuego {
   }
 
   bucleJuego() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.nave.actualizar();
+    this.nave.dibujar();
     this.controlador.moverAsteroides();
     this.particulasController.moverParticulas();
     requestAnimationFrame(() => this.bucleJuego());

@@ -1,7 +1,7 @@
 class Nave {
-    constructor(canvasId) {
-        this.canvas = document.getElementById(canvasId);
-        this.ctx = this.canvas.getContext("2d");
+    constructor(ctx, canvas) {
+        this.canvas = canvas;
+        this.ctx = ctx;
 
         this.ajustarPantalla();
         this.teclas = {};
@@ -42,7 +42,6 @@ class Nave {
         const ctx = this.ctx;
         const s   = 0.3; 
 
-        ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         ctx.save();
         ctx.translate(this.cx, this.cy);
         ctx.rotate(this.angulo);
@@ -103,14 +102,5 @@ class Nave {
         ctx.stroke();
 
         ctx.restore();
-    }
-
-    iniciar(){
-        const loop = () => {
-            this.actualizar();
-            this.dibujar();
-            requestAnimationFrame(loop);
-        };
-        requestAnimationFrame(loop);
     }
 }
