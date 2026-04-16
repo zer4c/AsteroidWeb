@@ -6,6 +6,7 @@ class PantallaJuego {
     this.controlador = null;
     this.particulasController = null;
     this.balaController = null;
+    this.score = null;
     this.intervaloGeneracion = null;
   }
 
@@ -23,6 +24,7 @@ class PantallaJuego {
     this.particulasController = new ParticulasController(this.ctx, this.canvas);
     this.controlador = new AsteroideController(this.ctx, this.canvas, this.particulasController);
     this.balaController = new BalaController(this.ctx, this.canvas);
+    this.score = new Score();
     this.nave = new NaveController(this.ctx, this.canvas, this.balaController);
 
     this.intervaloGeneracion = setInterval(() => {
@@ -63,6 +65,9 @@ class PantallaJuego {
             }
             this.controlador.eliminarAsteroide(j);
             this.balaController.balas.splice(i, 1);
+            if (this.score) {
+              this.score.incrementar();
+            }
             break;
           }
         }
