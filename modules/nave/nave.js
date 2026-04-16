@@ -14,9 +14,10 @@ class Nave {
 
     }
     ajustarPantalla() {
-        this.canvas.width  = window.innerWidth;
-        this.canvas.height = window.innerHeight;
-        this.cx = this.canvas.width  / 2;
+        // Área de juego fija en 800x600
+        this.canvas.width = 800;
+        this.canvas.height = 600;
+        this.cx = this.canvas.width / 2;
         this.cy = this.canvas.height / 2;
     }
     actualizar(){
@@ -34,6 +35,10 @@ class Nave {
         if(this.teclas["ArrowRight"] || this.teclas["D"] || this.teclas["d"]){
             this.angulo += this.velocidadGiro * (Math.PI / 180);
         }
+
+        // Limitar la nave dentro del canvas
+        this.cx = Math.max(0, Math.min(this.canvas.width, this.cx));
+        this.cy = Math.max(0, Math.min(this.canvas.height, this.cy));
     }
 
     
