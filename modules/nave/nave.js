@@ -7,14 +7,13 @@ class Nave {
         this.teclas = {};
         this.movimiento = 8;
         this.angulo = 0;
-        this.velocidadGiro = 0.5;
+        this.velocidadGiro = 5;
         window.addEventListener("resize", () => this.ajustarPantalla());
         window.addEventListener("keydown", (e) => this.teclas[e.key] = true);
         window.addEventListener("keyup", (e) => this.teclas[e.key] = false);
 
     }
     ajustarPantalla() {
-        // Área de juego fija en 800x600
         this.canvas.width = 800;
         this.canvas.height = 600;
         this.cx = this.canvas.width / 2;
@@ -36,7 +35,6 @@ class Nave {
             this.angulo += this.velocidadGiro * (Math.PI / 180);
         }
 
-        // Limitar la nave dentro del canvas
         this.cx = Math.max(0, Math.min(this.canvas.width, this.cx));
         this.cy = Math.max(0, Math.min(this.canvas.height, this.cy));
     }
@@ -45,7 +43,7 @@ class Nave {
 
     dibujar() {
         const ctx = this.ctx;
-        const s   = 0.3; 
+        const s   = 0.2; 
 
         ctx.save();
         ctx.translate(this.cx, this.cy);
@@ -97,7 +95,7 @@ class Nave {
         ctx.closePath();
         ctx.stroke();
 
-        ctx.strokeStyle = "red";
+        ctx.strokeStyle = "whitw";
         ctx.beginPath();
         ctx.moveTo(-20*s, -10*s);
         ctx.lineTo(20*s,  -10*s);
