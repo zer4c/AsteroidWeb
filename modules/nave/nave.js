@@ -1,17 +1,12 @@
-class Nave {
+class NaveSVG {
     constructor(ctx, canvas) {
         this.canvas = canvas;
         this.ctx = ctx;
 
         this.ajustarPantalla();
-        this.teclas = {};
         this.movimiento = 8;
         this.angulo = 0;
         this.velocidadGiro = 5;
-        window.addEventListener("resize", () => this.ajustarPantalla());
-        window.addEventListener("keydown", (e) => this.teclas[e.key] = true);
-        window.addEventListener("keyup", (e) => this.teclas[e.key] = false);
-
     }
     ajustarPantalla() {
         this.canvas.width = 800;
@@ -19,19 +14,19 @@ class Nave {
         this.cx = this.canvas.width / 2;
         this.cy = this.canvas.height / 2;
     }
-    actualizar(){
-        if(this.teclas["ArrowUp"] || this.teclas["W"] || this.teclas["w"]){
+    moverNave(teclas){
+        if(teclas["ArrowUp"] || teclas["W"] || teclas["w"]){
             this.cx += Math.sin(this.angulo) * this.movimiento;
             this.cy -= Math.cos(this.angulo) * this.movimiento;
         }
-        if(this.teclas["ArrowDown"] || this.teclas["S"] || this.teclas["s"]){
+        if(teclas["ArrowDown"] || teclas["S"] || teclas["s"]){
             this.cx -= Math.sin(this.angulo) * this.movimiento;
             this.cy += Math.cos(this.angulo) * this.movimiento;
         }
-        if(this.teclas["ArrowLeft"] || this.teclas["A"] || this.teclas["a"]){
+        if(teclas["ArrowLeft"] || teclas["A"] || teclas["a"]){
             this.angulo -= this.velocidadGiro * (Math.PI / 180)
         }
-        if(this.teclas["ArrowRight"] || this.teclas["D"] || this.teclas["d"]){
+        if(teclas["ArrowRight"] || teclas["D"] || teclas["d"]){
             this.angulo += this.velocidadGiro * (Math.PI / 180);
         }
 
@@ -95,7 +90,7 @@ class Nave {
         ctx.closePath();
         ctx.stroke();
 
-        ctx.strokeStyle = "whitw";
+        ctx.strokeStyle = "white";
         ctx.beginPath();
         ctx.moveTo(-20*s, -10*s);
         ctx.lineTo(20*s,  -10*s);

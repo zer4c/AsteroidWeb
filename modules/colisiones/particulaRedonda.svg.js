@@ -30,7 +30,7 @@ class ParticulaRedondaSVG {
     ctx.scale(escala, escala);
 
     ctx.beginPath();
-    ctx.arc(0, 0, 10, 0, 2 * Math.PI);
+    ctx.arc(0, 0, 15, 0, 2 * Math.PI);
     ctx.strokeStyle = "white";
     ctx.stroke();
 
