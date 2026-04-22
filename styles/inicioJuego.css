@@ -1,0 +1,22 @@
+.btn-juego {
+    padding: 14px 40px;
+    font-size: 18px;
+    letter-spacing: 3px;
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+    cursor: pointer;
+    transition: opacity 0.4s, transform 0.4s;
+}
+
+.game-inicio-juego{
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.game-inicio-juego.oculto {
+    display: none;
+}

@@ -8,6 +8,14 @@ class PantallaJuego {
     this.balaController = null;
     this.score = null;
     this.intervaloGeneracion = null;
+    this.juegoIniciado = false;
+    document.getElementById("btn-iniciar").addEventListener("click", () => {
+        if (!this.juegoIniciado) {
+            this.juegoIniciado = true;
+            document.getElementById("game-inicio").classList.add("oculto");
+            this.iniciarJuego();
+        }
+    });
   }
 
   intentarGenerarAsteroide(probabilidad) {
