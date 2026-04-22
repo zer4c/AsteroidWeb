@@ -39,6 +39,16 @@ class PantallaJuego {
     this.nave.moverNave();
     this.nave.nave.dibujar();
     this.balaController.moverBalas();
+    const balasDisponibles = this.balaController.balas.length - this.balaController.contarBalas();
+    // Actualizar barras de munición
+    for (let i = 1; i <= this.balaController.balas.length; i++) {
+      const barElement = document.getElementById(`ammo-${i}`);
+      if (i <= balasDisponibles) {
+        barElement.classList.add('active');
+      } else {
+        barElement.classList.remove('active');
+      }
+    }
     this.controlador.moverAsteroides();
     this.verificarColisiones();
     this.particulasController.moverParticulas();

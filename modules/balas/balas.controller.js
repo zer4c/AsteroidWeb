@@ -33,4 +33,8 @@ class BalaController {
       }
     }
   }
+
+  contarBalas() {
+    return this.balas.filter(bala => bala !== null).length;
+  }
 }
