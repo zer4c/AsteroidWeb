@@ -2,7 +2,7 @@ class PantallaJuego {
   constructor() {
     this.canvas = document.getElementById("miCanvas");
     this.ctx = this.canvas.getContext("2d");
-    this.nave = null;
+    this.naveController = null;
     this.controlador = null;
     this.particulasController = null;
     this.balaController = null;
@@ -25,7 +25,7 @@ class PantallaJuego {
     this.controlador = new AsteroideController(this.ctx, this.canvas, this.particulasController);
     this.balaController = new BalaController(this.ctx, this.canvas);
     this.score = new Score();
-    this.nave = new NaveController(this.ctx, this.canvas, this.balaController);
+    this.naveController = new NaveController(this.ctx, this.canvas, this.balaController);
 
     this.intervaloGeneracion = setInterval(() => {
       this.intentarGenerarAsteroide(Math.random());
@@ -36,11 +36,10 @@ class PantallaJuego {
 
   bucleJuego() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.nave.moverNave();
-    this.nave.nave.dibujar();
+    const moviendoAdelante = this.naveController.moverNave();
+    this.naveController.nave.dibujar(moviendoAdelante);
     this.balaController.moverBalas();
     const balasDisponibles = this.balaController.balas.length - this.balaController.contarBalas();
-    // Actualizar barras de munición
     for (let i = 1; i <= this.balaController.balas.length; i++) {
       const barElement = document.getElementById(`ammo-${i}`);
       if (i <= balasDisponibles) {
@@ -84,9 +83,5 @@ class PantallaJuego {
         }
       }
     }
-  }
-
-  detenerJuego() {
-    clearInterval(this.intervaloGeneracion);
   }
 }
