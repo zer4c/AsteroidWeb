@@ -46,8 +46,10 @@ class PantallaJuego {
   }
 
   verificarColisiones() {
-    for (let i = this.balaController.balas.length - 1; i >= 0; i--) {
+    for (let i = 0; i < this.balaController.balas.length; i++) {
       const bala = this.balaController.balas[i];
+      if (!bala) continue;
+
       for (let j = this.controlador.asteroides.length - 1; j >= 0; j--) {
         const ast = this.controlador.asteroides[j];
         if (ast) {
@@ -64,7 +66,7 @@ class PantallaJuego {
               this.particulasController.crearParticulaRedonda(ast.x, ast.y, velocidad, ast.escala);
             }
             this.controlador.eliminarAsteroide(j);
-            this.balaController.balas.splice(i, 1);
+            this.balaController.balas[i] = null;
             if (this.score) {
               this.score.incrementar();
             }
