@@ -4,7 +4,7 @@ class NaveController {
         this.canvas = canvas;
         this.balaController = balaController;
         this.nave = new NaveSVG(ctx, canvas);
-
+        this.vidas = 3;
         this.teclas = {};
         this.puedeDisparar = true;
         window.addEventListener("keydown", (e) => {
@@ -37,5 +37,21 @@ class NaveController {
 
     disparar() {
         this.balaController.crearBala(this.nave.cx, this.nave.cy, this.nave.angulo);
+    }
+    reducirVidas() {
+        if (this.vidas > 0) {
+            this.vidas--;
+            this.actualizarCorazones();
+        }
+        return this.vidas;
+    }
+
+    actualizarCorazones() {
+        for (let i = 1; i <= 3; i++) {
+            const el = document.getElementById(`heart-${i}`);
+            if (el) {
+                el.classList.toggle('perdido', i > this.vidas);
+            }
+        }
     }
 }

@@ -50,6 +50,7 @@ class PantallaJuego {
     }
     this.controlador.moverAsteroides();
     this.verificarColisiones();
+    this.verficarColisionNaveAsteroide();
     this.particulasController.moverParticulas();
     requestAnimationFrame(() => this.bucleJuego());
   }
@@ -83,5 +84,29 @@ class PantallaJuego {
         }
       }
     }
+  }
+  verficarColisionNaveAsteroide(){
+    const nave = this.naveController.nave;
+    const radioNave = 15;
+    for (let j = this.controlador.asteroides.length - 1; j >= 0; j--) {
+      const ast = this.controlador.asteroides[j];
+      if (!ast) continue;
+
+      const dx = nave.cx - ast.x;  
+      const dy = nave.cy - ast.y;  
+      const distMin = radioNave + ast.radio;
+
+      if (dx * dx + dy * dy < distMin * distMin) {
+        this.controlador.eliminarAsteroide(j);
+        const vidasRestantes = this.naveController.reducirVidas();
+        if (vidasRestantes <= 0) {
+          this.gameOver();
+        }
+      }
+    }
+  }
+  gameOver() {
+    clearInterval(this.intervaloGeneracion);
+    console.log('Game over');
   }
 }
