@@ -1,0 +1,24 @@
+.game-lives {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.lives-label {
+    margin-right: 4px;
+}
+
+.lives-hearts {
+    display: flex;
+    gap: 6px;
+}
+
+.heart {
+    font-size: 20px;
+    color: #ff4444;
+    transition: opacity 0.3s;
+}
+
+.heart.perdido {
+    opacity: 0.2;
+}
