@@ -16,7 +16,7 @@ class Asteroide2SVG {
   }
 
   get radio() {
-    return this.escala * 30;
+    return this.escala * 40;
   }
 
   actualizar(velocidadX, velocidadY) {
@@ -41,15 +41,6 @@ class Asteroide2SVG {
     ctx.lineTo(50, -5);
     ctx.lineTo(38, -15);
     ctx.lineTo(25, 13);
-    ctx.closePath();
-    ctx.strokeStyle = "white";
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.moveTo(-1.2, -15.0);
-    ctx.lineTo(38.3, -15.0);
-    ctx.lineTo(38.3, -54.5);
-    ctx.lineTo(-1.2, -54.5);
     ctx.closePath();
     ctx.strokeStyle = "white";
     ctx.stroke();

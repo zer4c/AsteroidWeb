@@ -56,7 +56,6 @@ class PantallaJuego {
           const dx = bala.x - ast.x;
           const dy = bala.y - ast.y;
           if (dx * dx + dy * dy < ast.radio * ast.radio) {
-            console.log("Colisión detectada!", ast.x, ast.y, ast.radio);
             for (let k = 0; k < 10; k++) {
               const velocidad = 50 + Math.random() * 100;
               this.particulasController.crearParticulaRectangular(ast.x, ast.y, velocidad, ast.escala);
