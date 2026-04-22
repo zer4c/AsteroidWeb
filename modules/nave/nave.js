@@ -34,16 +34,17 @@ class NaveSVG {
         this.cy = Math.max(0, Math.min(this.canvas.height, this.cy));
     }
 
-    
-
-    dibujar() {
+    dibujar(moviendoAdelante) {
+        if (moviendoAdelante === undefined) {
+            moviendoAdelante = false;
+        }
         const ctx = this.ctx;
-        const s   = 0.2; 
+        let s = 0.2;
 
         ctx.save();
         ctx.translate(this.cx, this.cy);
         ctx.rotate(this.angulo);
-        ctx.strokeStyle = "white";
+        ctx.strokeStyle = "white"; 
         
 
         ctx.beginPath();
@@ -68,26 +69,34 @@ class NaveSVG {
         ctx.closePath();
         ctx.stroke();
 
+        const flameLength = moviendoAdelante ? 105 * s : 90 * s;
+
         ctx.beginPath();
         ctx.moveTo(-45*s, 65*s);
         ctx.lineTo(-20*s, 55*s);
-        ctx.lineTo(-35*s, 90*s);
+        ctx.lineTo(-35*s, flameLength);
         ctx.closePath();
+        ctx.strokeStyle = moviendoAdelante ? "#ffa500" : "white";
+        ctx.lineWidth = moviendoAdelante ? 1.5 : 1;
         ctx.stroke();
 
         ctx.beginPath();
         ctx.moveTo(-15*s, 55*s);
-        ctx.lineTo(0,     47*s);
-        ctx.lineTo(15*s,  55*s);
-        ctx.lineTo(0,     90*s);
+        ctx.lineTo(0, 47*s);
+        ctx.lineTo(15*s, 55*s);
+        ctx.lineTo(0, flameLength);
         ctx.closePath();
+        ctx.strokeStyle = moviendoAdelante ? "#ff6347" : "white";
+        ctx.lineWidth = moviendoAdelante ? 1.5 : 1;
         ctx.stroke();
 
         ctx.beginPath();
         ctx.moveTo(45*s, 65*s);
         ctx.lineTo(20*s, 55*s);
-        ctx.lineTo(35*s, 90*s);
+        ctx.lineTo(35*s, flameLength);
         ctx.closePath();
+        ctx.strokeStyle = moviendoAdelante ? "#ffa500" : "white";
+        ctx.lineWidth = moviendoAdelante ? 1.5 : 1;
         ctx.stroke();
 
         ctx.strokeStyle = "white";

@@ -26,7 +26,13 @@ class NaveController {
     }
 
     moverNave() {
+        let moviendoAdelante = false;
+
+        if (this.teclas["ArrowUp"] || this.teclas["W"] || this.teclas["w"]) {
+            moviendoAdelante = true;
+        }
         this.nave.moverNave(this.teclas);
+        return moviendoAdelante;
     }
 
     disparar() {

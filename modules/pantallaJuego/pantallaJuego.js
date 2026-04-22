@@ -2,7 +2,7 @@ class PantallaJuego {
   constructor() {
     this.canvas = document.getElementById("miCanvas");
     this.ctx = this.canvas.getContext("2d");
-    this.nave = null;
+    this.naveController = null;
     this.controlador = null;
     this.particulasController = null;
     this.balaController = null;
@@ -25,7 +25,7 @@ class PantallaJuego {
     this.controlador = new AsteroideController(this.ctx, this.canvas, this.particulasController);
     this.balaController = new BalaController(this.ctx, this.canvas);
     this.score = new Score();
-    this.nave = new NaveController(this.ctx, this.canvas, this.balaController);
+    this.naveController = new NaveController(this.ctx, this.canvas, this.balaController);
 
     this.intervaloGeneracion = setInterval(() => {
       this.intentarGenerarAsteroide(Math.random());
@@ -36,9 +36,18 @@ class PantallaJuego {
 
   bucleJuego() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.nave.moverNave();
-    this.nave.nave.dibujar();
+    const moviendoAdelante = this.naveController.moverNave();
+    this.naveController.nave.dibujar(moviendoAdelante);
     this.balaController.moverBalas();
+    const balasDisponibles = this.balaController.balas.length - this.balaController.contarBalas();
+    for (let i = 1; i <= this.balaController.balas.length; i++) {
+      const barElement = document.getElementById(`ammo-${i}`);
+      if (i <= balasDisponibles) {
+        barElement.classList.add('active');
+      } else {
+        barElement.classList.remove('active');
+      }
+    }
     this.controlador.moverAsteroides();
     this.verificarColisiones();
     this.particulasController.moverParticulas();
@@ -46,15 +55,16 @@ class PantallaJuego {
   }
 
   verificarColisiones() {
-    for (let i = this.balaController.balas.length - 1; i >= 0; i--) {
+    for (let i = 0; i < this.balaController.balas.length; i++) {
       const bala = this.balaController.balas[i];
+      if (!bala) continue;
+
       for (let j = this.controlador.asteroides.length - 1; j >= 0; j--) {
         const ast = this.controlador.asteroides[j];
         if (ast) {
           const dx = bala.x - ast.x;
           const dy = bala.y - ast.y;
           if (dx * dx + dy * dy < ast.radio * ast.radio) {
-            console.log("Colisión detectada!", ast.x, ast.y, ast.radio);
             for (let k = 0; k < 10; k++) {
               const velocidad = 50 + Math.random() * 100;
               this.particulasController.crearParticulaRectangular(ast.x, ast.y, velocidad, ast.escala);
@@ -64,7 +74,7 @@ class PantallaJuego {
               this.particulasController.crearParticulaRedonda(ast.x, ast.y, velocidad, ast.escala);
             }
             this.controlador.eliminarAsteroide(j);
-            this.balaController.balas.splice(i, 1);
+            this.balaController.balas[i] = null;
             if (this.score) {
               this.score.incrementar();
             }
@@ -73,9 +83,5 @@ class PantallaJuego {
         }
       }
     }
-  }
-
-  detenerJuego() {
-    clearInterval(this.intervaloGeneracion);
   }
 }
