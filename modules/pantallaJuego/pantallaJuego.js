@@ -17,6 +17,10 @@ class PantallaJuego {
         }
     });
     document.getElementById("btn-reiniciar").addEventListener("click", () => this.reiniciarJuego());
+    document.getElementById("btn-reiniciar-gameover").addEventListener("click", () => {
+        document.getElementById("overlay-gameover").classList.add("oculto");
+        this.reiniciarJuego();
+    });
   }
 
   intentarGenerarAsteroide(probabilidad) {
@@ -32,6 +36,7 @@ class PantallaJuego {
   reiniciarJuego() {
     cancelAnimationFrame(this.animFrameId);
     clearInterval(this.intervaloGeneracion);
+    document.getElementById("overlay-gameover").classList.add("oculto"); 
     this.naveController = null;
     this.controlador = null;
     this.particulasController = null;
@@ -128,6 +133,7 @@ class PantallaJuego {
   }
   gameOver() {
     clearInterval(this.intervaloGeneracion);
-    console.log('Game over');
+    cancelAnimationFrame(this.animFrameId);
+    document.getElementById("overlay-gameover").classList.remove("oculto");
   }
 }

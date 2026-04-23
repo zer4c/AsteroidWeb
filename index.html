@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="styles/vidas.css">
     <link rel="stylesheet" href="styles/inicioJuego.css">
     <link rel="stylesheet" href="styles/reiniciarJuego.css">
+    <link rel="stylesheet" href="styles/gameOver.css">
 </head>
 <body>
     <div class="game-ui">
@@ -36,6 +37,11 @@
         <canvas id="miCanvas" width="800" height="600"></canvas>
         <div class="game-inicio-juego" id="game-inicio">
             <button class="btn-juego" id="btn-iniciar">INICIAR</button>
+        </div>
+        <div class="game-inicio-juego oculto" id="overlay-gameover">
+            <div class="gameover-content">
+                <h2>GAME OVER</h2>
+            </div>
         </div>
     </div>
     <script src="modules/asteroid/asteroide1.svg.js"></script>
