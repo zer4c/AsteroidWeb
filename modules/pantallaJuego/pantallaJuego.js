@@ -29,26 +29,32 @@ class PantallaJuego {
   }
 
   _iniciarEventos() {
-    document.getElementById("btn-iniciar").addEventListener("click", () => {
+
+    const iniciarJuegoHandler = (e) => {
+      if (e) e.preventDefault();
+
       if (!this.model.estaIniciado()) {
         this.model.marcarIniciado();
         this.view.mostrarJuego();
         this.iniciarJuego();
-      }
-    });
 
-    document.getElementById("btn-iniciar").addEventListener(
-      "touchstart",
-      (e) => {
-        e.preventDefault();
-        if (!this.model.estaIniciado()) {
-          this.model.marcarIniciado();
-          this.view.mostrarJuego();
-          this.iniciarJuego();
+        const audio = document.getElementById("bg-music");
+
+        if (audio) {
+          audio.muted = false;
+          audio.volume = 0.4;
+          audio.play().catch(err => console.log("Error audio:", err));
+        } else {
+          console.log("No se encontró el audio");
         }
-      },
-      { passive: false },
-    );
+      }
+    };
+
+    const btn = document.getElementById("btn-iniciar");
+
+    btn.addEventListener("click", iniciarJuegoHandler);
+    btn.addEventListener("touchstart", iniciarJuegoHandler, { passive: false });
+
 
     document.getElementById("btn-reiniciar").addEventListener("click", () => {
       if (this.scoreModel)
@@ -63,7 +69,6 @@ class PantallaJuego {
         this.reiniciarJuego();
       });
   }
-
   iniciarJuego() {
     this.particulasController = new ParticulasController(this.ctx, this.canvas);
     this.asteroidController = new AsteroideController(
