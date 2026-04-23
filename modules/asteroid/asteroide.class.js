@@ -1,9 +1,10 @@
 class AsteroideController {
   constructor(ctx, canvas, particulasController) {
     this.asteroides = new Array(10).fill(null);
-    this.ctx = ctx;
     this.canvas = canvas;
     this.particulasController = particulasController;
+    this.view1 = new AsteroideSVG(ctx);
+    this.view2 = new Asteroide2SVG(ctx);
   }
 
   parametrosAleatorios() {
@@ -43,16 +44,11 @@ class AsteroideController {
 
     const { x, y, vx, vy } = this.parametrosAleatorios();
     const rotacion = Math.random() * 360;
-    const asteroide = new AsteroideSVG(
-      this.ctx,
-      Math.random() * 0.5 + 0.5,
-      x,
-      y,
-      rotacion,
-    );
-    asteroide.vx = vx;
-    asteroide.vy = vy;
-    this.asteroides[indice] = asteroide;
+    const model = new AsteroideModel(Math.random() * 0.5 + 0.5, x, y, rotacion);
+    model.vx = vx;
+    model.vy = vy;
+    model._view = this.view1;
+    this.asteroides[indice] = model;
     return true;
   }
 
@@ -62,16 +58,11 @@ class AsteroideController {
 
     const { x, y, vx, vy } = this.parametrosAleatorios();
     const rotacion = Math.random() * 360;
-    const asteroide = new Asteroide2SVG(
-      this.ctx,
-      Math.random() * 0.5 + 0.5,
-      x,
-      y,
-      rotacion,
-    );
-    asteroide.vx = vx;
-    asteroide.vy = vy;
-    this.asteroides[indice] = asteroide;
+    const model = new AsteroideModel(Math.random() * 0.5 + 0.5, x, y, rotacion);
+    model.vx = vx;
+    model.vy = vy;
+    model._view = this.view2;
+    this.asteroides[indice] = model;
     return true;
   }
 
@@ -94,11 +85,21 @@ class AsteroideController {
   generarParticulas(asteroide) {
     for (let i = 0; i < 5; i++) {
       const velocidad = 100 + Math.random() * 100;
-      this.particulasController.crearParticulaRectangular(asteroide.x, asteroide.y, velocidad, asteroide.escala);
+      this.particulasController.crearParticulaRectangular(
+        asteroide.x,
+        asteroide.y,
+        velocidad,
+        asteroide.escala,
+      );
     }
     for (let i = 0; i < 5; i++) {
       const velocidad = 100 + Math.random() * 100;
-      this.particulasController.crearParticulaRedonda(asteroide.x, asteroide.y, velocidad, asteroide.escala);
+      this.particulasController.crearParticulaRedonda(
+        asteroide.x,
+        asteroide.y,
+        velocidad,
+        asteroide.escala,
+      );
     }
   }
 
@@ -113,7 +114,7 @@ class AsteroideController {
         return;
       }
 
-      asteroide.dibujar();
+      asteroide._view.dibujar(asteroide);
     });
   }
 }
