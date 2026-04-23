@@ -6,12 +6,14 @@ class PantallaJuego {
     this.controlador = null;
     this.particulasController = null;
     this.balaController = null;
-    this.score = null;
-    this.leaderboard = new Leaderboard();
+    this.scoreModel = null;
+    this.scoreView = new ScoreView();
+    this.leaderboardModel = new LeaderboardModel();
+    this.leaderboardView = new LeaderboardView();
     this.intervaloGeneracion = null;
     this.juegoIniciado = false;
 
-    this.leaderboard.renderizar();
+    this.leaderboardView.renderizar(this.leaderboardModel.obtenerPuntajes());
 
     document.getElementById("btn-iniciar").addEventListener("click", () => {
       if (!this.juegoIniciado) {
@@ -22,9 +24,11 @@ class PantallaJuego {
     });
 
     document.getElementById("btn-reiniciar").addEventListener("click", () => {
-      if (this.score) {
-        this.leaderboard.guardarPuntaje(this.score.obtenerValor());
-        this.leaderboard.renderizar();
+      if (this.scoreModel) {
+        this.leaderboardModel.guardarPuntaje(this.scoreModel.obtenerValor());
+        this.leaderboardView.renderizar(
+          this.leaderboardModel.obtenerPuntajes(),
+        );
       }
       this.reiniciarJuego();
     });
@@ -35,6 +39,79 @@ class PantallaJuego {
         document.getElementById("overlay-gameover").classList.add("oculto");
         this.reiniciarJuego();
       });
+
+    this._iniciarControlesMovil();
+  }
+
+  _iniciarControlesMovil() {
+    const btnIzq = document.getElementById("m-izq");
+    const btnDer = document.getElementById("m-der");
+    const btnUp = document.getElementById("m-up");
+    const btnDown = document.getElementById("m-down");
+    const btnFire = document.getElementById("m-fire");
+    const btnLb = document.getElementById("m-lb");
+    const overlayLb = document.getElementById("overlay-leaderboard");
+    const btnCerrarLb = document.getElementById("btn-cerrar-lb");
+
+    const press = (key) => {
+      if (this.naveController) this.naveController.teclas[key] = true;
+    };
+    const release = (key) => {
+      if (this.naveController) this.naveController.teclas[key] = false;
+    };
+
+    btnIzq.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      press("ArrowLeft");
+    });
+    btnIzq.addEventListener("touchend", (e) => {
+      e.preventDefault();
+      release("ArrowLeft");
+    });
+    btnDer.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      press("ArrowRight");
+    });
+    btnDer.addEventListener("touchend", (e) => {
+      e.preventDefault();
+      release("ArrowRight");
+    });
+    btnUp.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      press("ArrowUp");
+    });
+    btnUp.addEventListener("touchend", (e) => {
+      e.preventDefault();
+      release("ArrowUp");
+    });
+    btnDown.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      press("ArrowDown");
+    });
+    btnDown.addEventListener("touchend", (e) => {
+      e.preventDefault();
+      release("ArrowDown");
+    });
+
+    btnFire.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      if (this.naveController && this.naveController.puedeDisparar) {
+        this.naveController.disparar();
+        this.naveController.puedeDisparar = false;
+        setTimeout(() => {
+          if (this.naveController) this.naveController.puedeDisparar = true;
+        }, 300);
+      }
+    });
+
+    btnLb.addEventListener("click", () => {
+      this.leaderboardView.renderizar(this.leaderboardModel.obtenerPuntajes());
+      overlayLb.classList.remove("oculto");
+    });
+
+    btnCerrarLb.addEventListener("click", () => {
+      overlayLb.classList.add("oculto");
+    });
   }
 
   intentarGenerarAsteroide(probabilidad) {
@@ -54,7 +131,7 @@ class PantallaJuego {
     this.controlador = null;
     this.particulasController = null;
     this.balaController = null;
-    this.score = null;
+    this.scoreModel = null;
     this.intervaloGeneracion = null;
     this.ultimoTimestamp = 0;
     this.iniciarJuego();
@@ -68,7 +145,8 @@ class PantallaJuego {
       this.particulasController,
     );
     this.balaController = new BalaController(this.ctx, this.canvas);
-    this.score = new Score();
+    this.scoreModel = new ScoreModel();
+    this.scoreView.actualizar(this.scoreModel.obtenerValor());
     this.naveController = new NaveController(
       this.ctx,
       this.canvas,
@@ -139,8 +217,9 @@ class PantallaJuego {
             }
             this.controlador.eliminarAsteroide(j);
             this.balaController.balas[i] = null;
-            if (this.score) {
-              this.score.incrementar();
+            if (this.scoreModel) {
+              this.scoreModel.incrementar();
+              this.scoreView.actualizar(this.scoreModel.obtenerValor());
             }
             break;
           }
@@ -173,9 +252,9 @@ class PantallaJuego {
   gameOver() {
     clearInterval(this.intervaloGeneracion);
     cancelAnimationFrame(this.animFrameId);
-    if (this.score) {
-      this.leaderboard.guardarPuntaje(this.score.obtenerValor());
-      this.leaderboard.renderizar();
+    if (this.scoreModel) {
+      this.leaderboardModel.guardarPuntaje(this.scoreModel.obtenerValor());
+      this.leaderboardView.renderizar(this.leaderboardModel.obtenerPuntajes());
     }
     document.getElementById("overlay-gameover").classList.remove("oculto");
   }
