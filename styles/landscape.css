@@ -1,0 +1,164 @@
+.mobile-controls {
+  display: none;
+}
+
+.overlay-leaderboard {
+  display: none;
+}
+
+@media (orientation: landscape) and (max-width: 1024px) {
+
+  .leaderboard {
+    display: none;
+  }
+
+  .mobile-controls {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  .mc-left {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    display: flex;
+    gap: 12px;
+    pointer-events: all;
+  }
+
+  .mc-right {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    pointer-events: all;
+  }
+
+  .mc-top-right {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    pointer-events: all;
+  }
+
+  .mc-btn {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+  }
+
+  .mc-btn:active {
+    background: rgba(255, 255, 255, 0.18);
+  }
+
+  .mc-btn-fire {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    margin-top: 6px;
+  }
+
+  .mc-btn-fire:active {
+    background: rgba(255, 255, 255, 0.18);
+  }
+
+  .mc-btn-lb {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: white;
+    font-size: 13px;
+    letter-spacing: 1px;
+    font-family: 'Courier New', monospace;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+  }
+
+  .mc-btn-lb:active {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .overlay-leaderboard {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .overlay-leaderboard.oculto {
+    display: none;
+  }
+
+  .overlay-leaderboard .leaderboard {
+    display: block;
+    position: static;
+    transform: none;
+    width: 220px;
+  }
+
+  .lb-cerrar {
+    margin-top: 12px;
+    width: 100%;
+    padding: 8px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 0.7);
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+
+  .lb-cerrar:active {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}

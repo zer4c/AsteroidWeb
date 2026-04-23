@@ -9,12 +9,37 @@
     <link rel="stylesheet" href="styles/reiniciarJuego.css">
     <link rel="stylesheet" href="styles/gameOver.css">
     <link rel="stylesheet" href="styles/leaderboard.css">
+    <link rel="stylesheet" href="styles/landscape.css">
 </head>
 
 <body>
+
     <div class="leaderboard">
         <div class="lb-title">Top 10</div>
         <div id="leaderboard-list"></div>
+    </div>
+
+    <div class="overlay-leaderboard oculto" id="overlay-leaderboard">
+        <div class="leaderboard">
+            <div class="lb-title">Top 10</div>
+            <div id="leaderboard-list-landscape"></div>
+            <button class="lb-cerrar" id="btn-cerrar-lb">cerrar</button>
+        </div>
+    </div>
+
+    <div class="mobile-controls">
+        <div class="mc-left">
+            <button class="mc-btn" id="m-izq">&lt;</button>
+            <button class="mc-btn" id="m-der">&gt;</button>
+        </div>
+        <div class="mc-right">
+            <button class="mc-btn" id="m-up">^</button>
+            <button class="mc-btn" id="m-down">v</button>
+            <button class="mc-btn-fire" id="m-fire">*</button>
+        </div>
+        <div class="mc-top-right">
+            <button class="mc-btn-lb" id="m-lb">TOP</button>
+        </div>
     </div>
 
     <div class="game-ui">
@@ -74,8 +99,10 @@
     <script src="modules/nave/nave.model.js"></script>
     <script src="modules/nave/nave.svg.js"></script>
     <script src="modules/nave/nave.controller.js"></script>
-    <script src="modules/score/score.js"></script>
-    <script src="modules/score/leaderboard.js"></script>
+    <script src="modules/score/score.model.js"></script>
+    <script src="modules/score/score.view.js"></script>
+    <script src="modules/score/leaderboard.model.js"></script>
+    <script src="modules/score/leaderboard.view.js"></script>
     <script src="modules/pantallaJuego/pantallaJuego.js"></script>
     <script src="modules/main.js"></script>
 </body>
