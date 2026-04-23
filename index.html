@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Juego Asteroides</title>
     <link rel="stylesheet" href="styles/general.css">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="styles/reiniciarJuego.css">
     <link rel="stylesheet" href="styles/gameOver.css">
 </head>
+
 <body>
     <div class="game-ui">
         <div class="ui-top">
@@ -45,21 +47,30 @@
         <div class="overlay oculto" id="overlay-gameover">
             <div class="gameover-content">
                 <h2>GAME OVER</h2>
+                <button class="btn-overlay" id="btn-reiniciar-gameover">REINICIAR</button>
             </div>
         </div>
     </div>
-    <script src="modules/asteroid/asteroide1.svg.js"></script>
-    <script src="modules/asteroid/asteroide2.svg.js"></script>
-    <script src="modules/asteroid/asteroide.class.js"></script>
+
+
+    <script src="modules/colisiones/particula.model.js"></script>
     <script src="modules/colisiones/particulaRectangular.svg.js"></script>
     <script src="modules/colisiones/particulaRedonda.svg.js"></script>
     <script src="modules/colisiones/particulas.controller.js"></script>
+    <script src="modules/balas/bala.model.js"></script>
     <script src="modules/balas/balas.svg.js"></script>
     <script src="modules/balas/balas.controller.js"></script>
+    <script src="modules/asteroid/asteroide.model.js"></script>
+    <script src="modules/asteroid/asteroide1.svg.js"></script>
+    <script src="modules/asteroid/asteroide2.svg.js"></script>
+    <script src="modules/asteroid/estrella.svg.js"></script>
+    <script src="modules/asteroid/asteroide.class.js"></script>
+    <script src="modules/nave/nave.model.js"></script>
+    <script src="modules/nave/nave.svg.js"></script>
+    <script src="modules/nave/nave.controller.js"></script>
     <script src="modules/score/score.js"></script>
     <script src="modules/pantallaJuego/pantallaJuego.js"></script>
-    <script src="modules/nave/nave.js"></script>
-    <script src="modules/nave/nave.controller.js"></script>
     <script src="modules/main.js"></script>
 </body>
+
 </html>

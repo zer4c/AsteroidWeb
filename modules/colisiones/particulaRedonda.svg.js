@@ -1,30 +1,11 @@
 class ParticulaRedondaSVG {
-  constructor(ctx, escala, x, y, vx, vy, tiempoVida) {
+  constructor(ctx) {
     this.ctx = ctx;
-    this.escala = escala;
-    this._x = x;
-    this._y = y;
-    this.vx = vx;
-    this.vy = vy;
-    this.tiempoVida = tiempoVida;
   }
 
-  get x() {
-    return this._x;
-  }
-
-  get y() {
-    return this._y;
-  }
-
-  actualizar(deltaTime) {
-    this._x += this.vx * deltaTime;
-    this._y += this.vy * deltaTime;
-    this.tiempoVida -= deltaTime;
-  }
-
-  dibujar() {
-    const { ctx, escala, x, y } = this;
+  dibujar(model) {
+    const { ctx } = this;
+    const { escala, x, y } = model;
     ctx.save();
     ctx.translate(x, y);
     ctx.scale(escala, escala);
@@ -35,9 +16,5 @@ class ParticulaRedondaSVG {
     ctx.stroke();
 
     ctx.restore();
-  }
-
-  estaViva() {
-    return this.tiempoVida > 0;
   }
 }

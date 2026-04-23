@@ -1,4 +1,4 @@
-class Score{
+class Score {
   constructor() {
     this.score = 0;
   }
@@ -10,6 +10,6 @@ class Score{
 
   reiniciar() {
     this.score = 0;
-    this.updateDom();
+    document.getElementById("score-value").textContent = this.score;
   }
 }

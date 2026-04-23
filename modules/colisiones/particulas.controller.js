@@ -1,9 +1,10 @@
 class ParticulasController {
   constructor(ctx, canvas) {
     this.particulas = new Array(50).fill(null);
-    this.ctx = ctx;
     this.canvas = canvas;
     this.ultimoTiempo = Date.now();
+    this.viewRectangular = new ParticulaRectangularSVG(ctx);
+    this.viewRedonda = new ParticulaRedondaSVG(ctx);
   }
 
   crearParticulaRectangular(x, y, velocidad, escala) {
@@ -15,7 +16,9 @@ class ParticulasController {
     const vy = Math.sin(angulo) * velocidad;
     const tiempoVida = 0.5;
 
-    this.particulas[indice] = new ParticulaRectangularSVG(this.ctx, escala, x, y, vx, vy, tiempoVida);
+    const model = new ParticulaModel(escala, x, y, vx, vy, tiempoVida);
+    model._view = this.viewRectangular;
+    this.particulas[indice] = model;
     return true;
   }
 
@@ -28,7 +31,9 @@ class ParticulasController {
     const vy = Math.sin(angulo) * velocidad;
     const tiempoVida = 1;
 
-    this.particulas[indice] = new ParticulaRedondaSVG(this.ctx, escala, x, y, vx, vy, tiempoVida);
+    const model = new ParticulaModel(escala, x, y, vx, vy, tiempoVida);
+    model._view = this.viewRedonda;
+    this.particulas[indice] = model;
     return true;
   }
 
@@ -52,7 +57,7 @@ class ParticulasController {
         return;
       }
 
-      particula.dibujar();
+      particula._view.dibujar(particula);
     });
   }
 }

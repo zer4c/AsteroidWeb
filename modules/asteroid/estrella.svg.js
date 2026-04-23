@@ -1,18 +1,11 @@
 class EstrellaSVG {
-  constructor(ctx, escala, x, y) {
+  constructor(ctx) {
     this.ctx = ctx;
-    this.escala = escala;
-    this.x = x;
-    this.y = y;
   }
 
-  actualizar(velocidadX, velocidadY) {
-    this.x += velocidadX;
-    this.y += velocidadY;
-  }
-
-  dibujar() {
-    const { ctx, escala, x, y } = this;
+  dibujar(model) {
+    const { ctx } = this;
+    const { escala, x, y } = model;
     ctx.save();
     ctx.translate(x, y);
     ctx.scale(escala, escala);

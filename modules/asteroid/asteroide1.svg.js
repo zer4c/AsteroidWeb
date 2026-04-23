@@ -1,34 +1,15 @@
 class AsteroideSVG {
-  constructor(ctx, escala, x, y, rotacion) {
+  constructor(ctx) {
     this.ctx = ctx;
-    this.escala = escala;
-    this._x = x;
-    this._y = y;
-    this.rotacion = rotacion;
   }
 
-  get x() {
-    return this._x;
-  }
-
-  get y() {
-    return this._y;
-  }
-  get radio() {
-    return this.escala * 40;
-  }
-
-  actualizar(velocidadX, velocidadY) {
-    this._x += velocidadX;
-    this._y += velocidadY;
-  }
-
-  dibujar() {
-    const { ctx, escala, x, y } = this;
+  dibujar(model) {
+    const { ctx } = this;
+    const { escala, x, y } = model;
     ctx.save();
     ctx.translate(x, y);
     ctx.scale(escala, escala);
-    ctx.rotate(this.rotacion * Math.PI / 180); 
+    ctx.rotate((model.rotacion * Math.PI) / 180);
 
     ctx.beginPath();
     ctx.moveTo(0, 0);
