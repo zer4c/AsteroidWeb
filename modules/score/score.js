@@ -12,4 +12,8 @@ class Score {
     this.score = 0;
     document.getElementById("score-value").textContent = this.score;
   }
+
+  obtenerValor() {
+    return this.score;
+  }
 }
