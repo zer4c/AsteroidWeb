@@ -1,11 +1,6 @@
 .game-lives {
     display: flex;
     align-items: center;
-    gap: 8px;
-}
-
-.lives-label {
-    margin-right: 4px;
 }
 
 .lives-hearts {
@@ -14,7 +9,7 @@
 }
 
 .heart {
-    font-size: 20px;
+    font-size: 18px;
     color: #ff4444;
     transition: opacity 0.3s;
 }

@@ -1,22 +1,28 @@
-.btn-juego {
-    padding: 14px 40px;
-    font-size: 18px;
-    letter-spacing: 3px;
-    background: transparent;
-    color: white;
-    border: 2px solid white;
-    cursor: pointer;
-    transition: opacity 0.4s, transform 0.4s;
-}
-
-.game-inicio-juego{
+.overlay {
     position: absolute;
     inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.5);
 }
 
-.game-inicio-juego.oculto {
+.overlay.oculto {
     display: none;
+}
+
+.btn-overlay {
+    padding: 14px 40px;
+    font-size: 16px;
+    letter-spacing: 4px;
+    background: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+    cursor: pointer;
+    font-family: monospace;
+}
+
+.btn-overlay:hover {
+    background: rgba(255, 255, 255, 0.1);
 }

@@ -67,7 +67,7 @@ class PantallaJuego {
     this.balaController.moverBalas();
     const balasDisponibles = this.balaController.balas.length - this.balaController.contarBalas();
     for (let i = 1; i <= this.balaController.balas.length; i++) {
-      const barElement = document.getElementById(`ammo-${i}`);
+      const barElement = document.getElementById(`balas-${i}`);
       if (i <= balasDisponibles) {
         barElement.classList.add('active');
       } else {
@@ -111,6 +111,7 @@ class PantallaJuego {
       }
     }
   }
+  
   verficarColisionNaveAsteroide(){
     const nave = this.naveController.nave;
     const radioNave = 15;
@@ -131,6 +132,7 @@ class PantallaJuego {
       }
     }
   }
+
   gameOver() {
     clearInterval(this.intervaloGeneracion);
     cancelAnimationFrame(this.animFrameId);
