@@ -1,89 +1,89 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: monospace;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: monospace;
 }
 
 body {
-    background-color: #000;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    gap: 8px;
+  background-color: #000;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  gap: 8px;
 }
 
 .game-ui {
-    width: 800px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+  width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .ui-top {
-    display: flex;
-    justify-content: center;
-    padding: 8px 0;
-    border-bottom: 1px solid #222;
+  display: flex;
+  justify-content: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #222;
 }
 
 .ui-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 6px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
 }
 
 .game-title {
-    font-size: 28px;
-    font-weight: bold;
-    letter-spacing: 8px;
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: 8px;
 }
 
 .game-score {
-    font-size: 16px;
-    color: #7fff00;
-    letter-spacing: 2px;
+  font-size: 16px;
+  color: #7fff00;
+  letter-spacing: 2px;
 }
 
 .ui-label {
-    font-size: 13px;
-    letter-spacing: 2px;
-    color: #aaa;
-    margin-right: 6px;
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: #aaa;
+  margin-right: 6px;
 }
 
 .game-container {
-    position: relative;
-    width: 800px;
-    height: 600px;
-    border: 1px solid #333;
-    background: #000;
+  position: relative;
+  width: 800px;
+  height: 600px;
+  border: 1px solid #333;
+  background: #000;
 }
 
 .balas-bars {
-    display: flex;
-    gap: 3px;
+  display: flex;
+  gap: 3px;
 }
 
 .balas-bar {
-    width: 18px;
-    height: 7px;
-    background-color: #222;
-    border: 1px solid #555;
-    border-radius: 2px;
-    transition: background-color 0.2s;
+  width: 18px;
+  height: 7px;
+  background-color: #222;
+  border: 1px solid #555;
+  border-radius: 2px;
+  transition: background-color 0.2s;
 }
 
 .balas-bar.active {
-    background-color: #7fff00;
-    box-shadow: 0 0 4px #7fff00;
+  background-color: #7fff00;
+  box-shadow: 0 0 4px #7fff00;
 }
 
 .game-balas {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }

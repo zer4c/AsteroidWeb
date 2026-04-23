@@ -1,19 +1,19 @@
 .game-lives {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .lives-hearts {
-    display: flex;
-    gap: 6px;
+  display: flex;
+  gap: 6px;
 }
 
 .heart {
-    font-size: 18px;
-    color: #ff4444;
-    transition: opacity 0.3s;
+  font-size: 18px;
+  color: #ff4444;
+  transition: opacity 0.3s;
 }
 
 .heart.perdido {
-    opacity: 0.2;
+  opacity: 0.2;
 }

@@ -1,14 +1,14 @@
 .btn-ui {
-    padding: 6px 18px;
-    font-size: 12px;
-    letter-spacing: 2px;
-    background: transparent;
-    color: #fff;
-    border: 1px solid #fff;
-    cursor: pointer;
-    font-family: monospace;
+  padding: 6px 18px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  background: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+  cursor: pointer;
+  font-family: monospace;
 }
 
 .btn-ui:hover {
-    background: #ffffff1a;
+  background: #ffffff1a;
 }
