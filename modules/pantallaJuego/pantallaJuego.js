@@ -7,8 +7,11 @@ class PantallaJuego {
     this.particulasController = null;
     this.balaController = null;
     this.score = null;
+    this.leaderboard = new Leaderboard();
     this.intervaloGeneracion = null;
     this.juegoIniciado = false;
+
+    this.leaderboard.renderizar();
 
     document.getElementById("btn-iniciar").addEventListener("click", () => {
       if (!this.juegoIniciado) {
@@ -18,9 +21,13 @@ class PantallaJuego {
       }
     });
 
-    document
-      .getElementById("btn-reiniciar")
-      .addEventListener("click", () => this.reiniciarJuego());
+    document.getElementById("btn-reiniciar").addEventListener("click", () => {
+      if (this.score) {
+        this.leaderboard.guardarPuntaje(this.score.obtenerValor());
+        this.leaderboard.renderizar();
+      }
+      this.reiniciarJuego();
+    });
 
     document
       .getElementById("btn-reiniciar-gameover")
@@ -32,7 +39,6 @@ class PantallaJuego {
 
   intentarGenerarAsteroide(probabilidad) {
     if (probabilidad < 0.5) return;
-
     if (Math.random() < 0.5) {
       this.controlador.crearAsteroide1();
     } else {
@@ -167,6 +173,10 @@ class PantallaJuego {
   gameOver() {
     clearInterval(this.intervaloGeneracion);
     cancelAnimationFrame(this.animFrameId);
+    if (this.score) {
+      this.leaderboard.guardarPuntaje(this.score.obtenerValor());
+      this.leaderboard.renderizar();
+    }
     document.getElementById("overlay-gameover").classList.remove("oculto");
   }
 }
