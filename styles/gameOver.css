@@ -1,0 +1,13 @@
+.gameover-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    color: #fff;
+    letter-spacing: 6px;
+}
+
+.gameover-content h2 {
+    font-size: 52px;
+    font-weight: bold;
+}

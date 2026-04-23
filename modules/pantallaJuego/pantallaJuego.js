@@ -8,6 +8,19 @@ class PantallaJuego {
     this.balaController = null;
     this.score = null;
     this.intervaloGeneracion = null;
+    this.juegoIniciado = false;
+    document.getElementById("btn-iniciar").addEventListener("click", () => {
+        if (!this.juegoIniciado) {
+            this.juegoIniciado = true;
+            document.getElementById("game-inicio").classList.add("oculto");
+            this.iniciarJuego();
+        }
+    });
+    document.getElementById("btn-reiniciar").addEventListener("click", () => this.reiniciarJuego());
+    document.getElementById("btn-reiniciar-gameover").addEventListener("click", () => {
+        document.getElementById("overlay-gameover").classList.add("oculto");
+        this.reiniciarJuego();
+    });
   }
 
   intentarGenerarAsteroide(probabilidad) {
@@ -20,6 +33,19 @@ class PantallaJuego {
     }
   }
 
+  reiniciarJuego() {
+    cancelAnimationFrame(this.animFrameId);
+    clearInterval(this.intervaloGeneracion);
+    document.getElementById("overlay-gameover").classList.add("oculto"); 
+    this.naveController = null;
+    this.controlador = null;
+    this.particulasController = null;
+    this.balaController = null;
+    this.score = null;
+    this.intervaloGeneracion = null;
+    this.ultimoTimestamp = 0;
+    this.iniciarJuego();
+  }
   iniciarJuego() {
     this.particulasController = new ParticulasController(this.ctx, this.canvas);
     this.controlador = new AsteroideController(this.ctx, this.canvas, this.particulasController);
@@ -41,7 +67,7 @@ class PantallaJuego {
     this.balaController.moverBalas();
     const balasDisponibles = this.balaController.balas.length - this.balaController.contarBalas();
     for (let i = 1; i <= this.balaController.balas.length; i++) {
-      const barElement = document.getElementById(`ammo-${i}`);
+      const barElement = document.getElementById(`balas-${i}`);
       if (i <= balasDisponibles) {
         barElement.classList.add('active');
       } else {
@@ -52,7 +78,7 @@ class PantallaJuego {
     this.verificarColisiones();
     this.verficarColisionNaveAsteroide();
     this.particulasController.moverParticulas();
-    requestAnimationFrame(() => this.bucleJuego());
+    this.animFrameId = requestAnimationFrame(() => this.bucleJuego());
   }
 
   verificarColisiones() {
@@ -85,6 +111,7 @@ class PantallaJuego {
       }
     }
   }
+  
   verficarColisionNaveAsteroide(){
     const nave = this.naveController.nave;
     const radioNave = 15;
@@ -105,8 +132,10 @@ class PantallaJuego {
       }
     }
   }
+
   gameOver() {
     clearInterval(this.intervaloGeneracion);
-    console.log('Game over');
+    cancelAnimationFrame(this.animFrameId);
+    document.getElementById("overlay-gameover").classList.remove("oculto");
   }
 }

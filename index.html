@@ -4,32 +4,49 @@
     <title>Juego Asteroides</title>
     <link rel="stylesheet" href="styles/general.css">
     <link rel="stylesheet" href="styles/vidas.css">
+    <link rel="stylesheet" href="styles/inicioJuego.css">
+    <link rel="stylesheet" href="styles/reiniciarJuego.css">
+    <link rel="stylesheet" href="styles/gameOver.css">
 </head>
 <body>
     <div class="game-ui">
-        <div class="game-title">ASTEROIDES</div>
-        <div class="game-score">PUNTAJE: <span id="score-value">0</span></div>
-        <div class="game-lives">
-            <span class="lives-label">VIDAS:</span>
-            <div class="lives-hearts">
-                <div class="heart" id="heart-1">♥</div>
-                <div class="heart" id="heart-2">♥</div>
-                <div class="heart" id="heart-3">♥</div>
-            </div>
+        <div class="ui-top">
+            <div class="game-title">ASTEROIDES</div>
         </div>
-        <div class="game-ammo">
-            <span class="ammo-label">BALAS:</span>
-            <div class="ammo-bars">
-                <div class="ammo-bar" id="ammo-1"></div>
-                <div class="ammo-bar" id="ammo-2"></div>
-                <div class="ammo-bar" id="ammo-3"></div>
-                <div class="ammo-bar" id="ammo-4"></div>
-                <div class="ammo-bar" id="ammo-5"></div>
+        <div class="ui-bottom">
+            <div class="game-score">PUNTAJE: <span id="score-value">0</span></div>
+            <div class="game-lives">
+                <span class="ui-label">VIDAS:</span>
+                <div class="lives-hearts">
+                    <div class="heart" id="heart-1">♥</div>
+                    <div class="heart" id="heart-2">♥</div>
+                    <div class="heart" id="heart-3">♥</div>
+                </div>
             </div>
+            <div class="game-balas">
+                <span class="ui-label">BALAS:</span>
+                <div class="balas-bars">
+                    <div class="balas-bar" id="balas-1"></div>
+                    <div class="balas-bar" id="balas-2"></div>
+                    <div class="balas-bar" id="balas-3"></div>
+                    <div class="balas-bar" id="balas-4"></div>
+                    <div class="balas-bar" id="balas-5"></div>
+                </div>
+            </div>
+            <button class="btn-ui" id="btn-reiniciar">REINICIAR</button>
         </div>
     </div>
+
     <div class="game-container">
         <canvas id="miCanvas" width="800" height="600"></canvas>
+        <div class="overlay" id="game-inicio">
+            <button class="btn-overlay" id="btn-iniciar">INICIAR</button>
+        </div>
+        <div class="overlay oculto" id="overlay-gameover">
+            <div class="gameover-content">
+                <h2>GAME OVER</h2>
+            </div>
+        </div>
     </div>
     <script src="modules/asteroid/asteroide1.svg.js"></script>
     <script src="modules/asteroid/asteroide2.svg.js"></script>
