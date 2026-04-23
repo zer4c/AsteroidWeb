@@ -1,0 +1,58 @@
+.leaderboard {
+  position: fixed;
+  top: 50%;
+  left: 200px;
+  transform: translateY(-50%);
+  width: 200px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.6);
+  padding: 16px;
+  font-family: "Courier New", monospace;
+}
+
+.lb-title {
+  color: white;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.lb-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.lb-rank {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 12px;
+}
+
+.lb-score {
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.lb-empty {
+  color: rgba(255, 255, 255, 0.2);
+  font-weight: normal;
+}
+
+.lb-entry:first-child .lb-rank {
+  color: #ffd700;
+}
+
+.lb-entry:nth-child(2) .lb-rank {
+  color: #c0c0c0;
+}
+
+.lb-entry:nth-child(3) .lb-rank {
+  color: #cd7f32;
+}
