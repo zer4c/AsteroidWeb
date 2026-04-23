@@ -7,9 +7,51 @@
 }
 
 @media (orientation: landscape) and (max-width: 1024px) {
+  html,
+  body {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
 
   .leaderboard {
     display: none;
+  }
+
+  .game-ui {
+    transform: scale(0.5);
+    transform-origin: top center;
+    margin-bottom: -40px;
+  }
+
+  .game-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  #miCanvas {
+    max-width: 100vw;
+    max-height: 100vh;
+    width: auto;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: contain;
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 
   .mobile-controls {
@@ -25,39 +67,39 @@
 
   .mc-left {
     position: absolute;
-    bottom: 24px;
-    left: 24px;
+    bottom: 16px;
+    left: 16px;
     display: flex;
-    gap: 12px;
+    gap: 10px;
     pointer-events: all;
   }
 
   .mc-right {
     position: absolute;
-    bottom: 24px;
-    right: 24px;
+    bottom: 16px;
+    right: 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     pointer-events: all;
   }
 
   .mc-top-right {
     position: absolute;
-    top: 16px;
-    right: 16px;
+    top: 12px;
+    right: 12px;
     pointer-events: all;
   }
 
   .mc-btn {
-    width: 58px;
-    height: 58px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: rgba(255, 255, 255, 0.7);
-    font-size: 22px;
+    font-size: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -74,8 +116,8 @@
   }
 
   .mc-btn-fire {
-    width: 58px;
-    height: 58px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -90,7 +132,7 @@
     touch-action: none;
     backdrop-filter: blur(2px);
     -webkit-backdrop-filter: blur(2px);
-    margin-top: 6px;
+    margin-top: 4px;
   }
 
   .mc-btn-fire:active {
@@ -98,15 +140,15 @@
   }
 
   .mc-btn-lb {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     border-radius: 8px;
     background: rgba(0, 0, 0, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.25);
     color: white;
-    font-size: 13px;
+    font-size: 12px;
     letter-spacing: 1px;
-    font-family: 'Courier New', monospace;
+    font-family: "Courier New", monospace;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -141,17 +183,17 @@
     display: block;
     position: static;
     transform: none;
-    width: 220px;
+    width: 200px;
   }
 
   .lb-cerrar {
-    margin-top: 12px;
+    margin-top: 10px;
     width: 100%;
-    padding: 8px;
+    padding: 7px;
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.25);
     color: rgba(255, 255, 255, 0.7);
-    font-family: 'Courier New', monospace;
+    font-family: "Courier New", monospace;
     font-size: 11px;
     letter-spacing: 2px;
     cursor: pointer;

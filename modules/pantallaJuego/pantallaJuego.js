@@ -60,41 +60,42 @@ class PantallaJuego {
       if (this.naveController) this.naveController.teclas[key] = false;
     };
 
-    btnIzq.addEventListener("touchstart", (e) => {
-      e.preventDefault();
-      press("ArrowLeft");
-    });
-    btnIzq.addEventListener("touchend", (e) => {
-      e.preventDefault();
-      release("ArrowLeft");
-    });
-    btnDer.addEventListener("touchstart", (e) => {
-      e.preventDefault();
-      press("ArrowRight");
-    });
-    btnDer.addEventListener("touchend", (e) => {
-      e.preventDefault();
-      release("ArrowRight");
-    });
-    btnUp.addEventListener("touchstart", (e) => {
-      e.preventDefault();
-      press("ArrowUp");
-    });
-    btnUp.addEventListener("touchend", (e) => {
-      e.preventDefault();
-      release("ArrowUp");
-    });
-    btnDown.addEventListener("touchstart", (e) => {
-      e.preventDefault();
-      press("ArrowDown");
-    });
-    btnDown.addEventListener("touchend", (e) => {
-      e.preventDefault();
-      release("ArrowDown");
-    });
+    const addHold = (btn, key) => {
+      btn.addEventListener(
+        "touchstart",
+        (e) => {
+          e.preventDefault();
+          press(key);
+        },
+        { passive: false },
+      );
+      btn.addEventListener(
+        "touchend",
+        (e) => {
+          e.preventDefault();
+          release(key);
+        },
+        { passive: false },
+      );
+      btn.addEventListener(
+        "touchcancel",
+        (e) => {
+          e.preventDefault();
+          release(key);
+        },
+        { passive: false },
+      );
+      btn.addEventListener("mousedown", () => press(key));
+      btn.addEventListener("mouseup", () => release(key));
+      btn.addEventListener("mouseleave", () => release(key));
+    };
 
-    btnFire.addEventListener("touchstart", (e) => {
-      e.preventDefault();
+    addHold(btnIzq, "ArrowLeft");
+    addHold(btnDer, "ArrowRight");
+    addHold(btnUp, "ArrowUp");
+    addHold(btnDown, "ArrowDown");
+
+    const dispararMovil = () => {
       if (this.naveController && this.naveController.puedeDisparar) {
         this.naveController.disparar();
         this.naveController.puedeDisparar = false;
@@ -102,7 +103,17 @@ class PantallaJuego {
           if (this.naveController) this.naveController.puedeDisparar = true;
         }, 300);
       }
-    });
+    };
+
+    btnFire.addEventListener(
+      "touchstart",
+      (e) => {
+        e.preventDefault();
+        dispararMovil();
+      },
+      { passive: false },
+    );
+    btnFire.addEventListener("mousedown", () => dispararMovil());
 
     btnLb.addEventListener("click", () => {
       this.leaderboardView.renderizar(this.leaderboardModel.obtenerPuntajes());
@@ -112,6 +123,19 @@ class PantallaJuego {
     btnCerrarLb.addEventListener("click", () => {
       overlayLb.classList.add("oculto");
     });
+
+    document.getElementById("btn-iniciar").addEventListener(
+      "touchstart",
+      (e) => {
+        e.preventDefault();
+        if (!this.juegoIniciado) {
+          this.juegoIniciado = true;
+          document.getElementById("game-inicio").classList.add("oculto");
+          this.iniciarJuego();
+        }
+      },
+      { passive: false },
+    );
   }
 
   intentarGenerarAsteroide(probabilidad) {
