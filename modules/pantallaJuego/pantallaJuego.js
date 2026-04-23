@@ -9,18 +9,25 @@ class PantallaJuego {
     this.score = null;
     this.intervaloGeneracion = null;
     this.juegoIniciado = false;
+
     document.getElementById("btn-iniciar").addEventListener("click", () => {
-        if (!this.juegoIniciado) {
-            this.juegoIniciado = true;
-            document.getElementById("game-inicio").classList.add("oculto");
-            this.iniciarJuego();
-        }
+      if (!this.juegoIniciado) {
+        this.juegoIniciado = true;
+        document.getElementById("game-inicio").classList.add("oculto");
+        this.iniciarJuego();
+      }
     });
-    document.getElementById("btn-reiniciar").addEventListener("click", () => this.reiniciarJuego());
-    document.getElementById("btn-reiniciar-gameover").addEventListener("click", () => {
+
+    document
+      .getElementById("btn-reiniciar")
+      .addEventListener("click", () => this.reiniciarJuego());
+
+    document
+      .getElementById("btn-reiniciar-gameover")
+      .addEventListener("click", () => {
         document.getElementById("overlay-gameover").classList.add("oculto");
         this.reiniciarJuego();
-    });
+      });
   }
 
   intentarGenerarAsteroide(probabilidad) {
@@ -36,7 +43,7 @@ class PantallaJuego {
   reiniciarJuego() {
     cancelAnimationFrame(this.animFrameId);
     clearInterval(this.intervaloGeneracion);
-    document.getElementById("overlay-gameover").classList.add("oculto"); 
+    document.getElementById("overlay-gameover").classList.add("oculto");
     this.naveController = null;
     this.controlador = null;
     this.particulasController = null;
@@ -46,12 +53,21 @@ class PantallaJuego {
     this.ultimoTimestamp = 0;
     this.iniciarJuego();
   }
+
   iniciarJuego() {
     this.particulasController = new ParticulasController(this.ctx, this.canvas);
-    this.controlador = new AsteroideController(this.ctx, this.canvas, this.particulasController);
+    this.controlador = new AsteroideController(
+      this.ctx,
+      this.canvas,
+      this.particulasController,
+    );
     this.balaController = new BalaController(this.ctx, this.canvas);
     this.score = new Score();
-    this.naveController = new NaveController(this.ctx, this.canvas, this.balaController);
+    this.naveController = new NaveController(
+      this.ctx,
+      this.canvas,
+      this.balaController,
+    );
 
     this.intervaloGeneracion = setInterval(() => {
       this.intentarGenerarAsteroide(Math.random());
@@ -62,18 +78,23 @@ class PantallaJuego {
 
   bucleJuego() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
     const moviendoAdelante = this.naveController.moverNave();
-    this.naveController.nave.dibujar(moviendoAdelante);
+    this.naveController.dibujar(moviendoAdelante);
+
     this.balaController.moverBalas();
-    const balasDisponibles = this.balaController.balas.length - this.balaController.contarBalas();
+
+    const balasDisponibles =
+      this.balaController.balas.length - this.balaController.contarBalas();
     for (let i = 1; i <= this.balaController.balas.length; i++) {
       const barElement = document.getElementById(`balas-${i}`);
       if (i <= balasDisponibles) {
-        barElement.classList.add('active');
+        barElement.classList.add("active");
       } else {
-        barElement.classList.remove('active');
+        barElement.classList.remove("active");
       }
     }
+
     this.controlador.moverAsteroides();
     this.verificarColisiones();
     this.verficarColisionNaveAsteroide();
@@ -94,11 +115,21 @@ class PantallaJuego {
           if (dx * dx + dy * dy < ast.radio * ast.radio) {
             for (let k = 0; k < 10; k++) {
               const velocidad = 50 + Math.random() * 100;
-              this.particulasController.crearParticulaRectangular(ast.x, ast.y, velocidad, ast.escala);
+              this.particulasController.crearParticulaRectangular(
+                ast.x,
+                ast.y,
+                velocidad,
+                ast.escala,
+              );
             }
             for (let k = 0; k < 10; k++) {
               const velocidad = 50 + Math.random() * 100;
-              this.particulasController.crearParticulaRedonda(ast.x, ast.y, velocidad, ast.escala);
+              this.particulasController.crearParticulaRedonda(
+                ast.x,
+                ast.y,
+                velocidad,
+                ast.escala,
+              );
             }
             this.controlador.eliminarAsteroide(j);
             this.balaController.balas[i] = null;
@@ -111,16 +142,16 @@ class PantallaJuego {
       }
     }
   }
-  
-  verficarColisionNaveAsteroide(){
-    const nave = this.naveController.nave;
+
+  verficarColisionNaveAsteroide() {
+    const nave = this.naveController.model;
     const radioNave = 15;
     for (let j = this.controlador.asteroides.length - 1; j >= 0; j--) {
       const ast = this.controlador.asteroides[j];
       if (!ast) continue;
 
-      const dx = nave.cx - ast.x;  
-      const dy = nave.cy - ast.y;  
+      const dx = nave.cx - ast.x;
+      const dy = nave.cy - ast.y;
       const distMin = radioNave + ast.radio;
 
       if (dx * dx + dy * dy < distMin * distMin) {
