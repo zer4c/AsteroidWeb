@@ -16,6 +16,7 @@ class PantallaJuego {
             this.iniciarJuego();
         }
     });
+    document.getElementById("btn-reiniciar").addEventListener("click", () => this.reiniciarJuego());
   }
 
   intentarGenerarAsteroide(probabilidad) {
@@ -28,6 +29,18 @@ class PantallaJuego {
     }
   }
 
+  reiniciarJuego() {
+    cancelAnimationFrame(this.animFrameId);
+    clearInterval(this.intervaloGeneracion);
+    this.naveController = null;
+    this.controlador = null;
+    this.particulasController = null;
+    this.balaController = null;
+    this.score = null;
+    this.intervaloGeneracion = null;
+    this.ultimoTimestamp = 0;
+    this.iniciarJuego();
+  }
   iniciarJuego() {
     this.particulasController = new ParticulasController(this.ctx, this.canvas);
     this.controlador = new AsteroideController(this.ctx, this.canvas, this.particulasController);
@@ -60,7 +73,7 @@ class PantallaJuego {
     this.verificarColisiones();
     this.verficarColisionNaveAsteroide();
     this.particulasController.moverParticulas();
-    requestAnimationFrame(() => this.bucleJuego());
+    this.animFrameId = requestAnimationFrame(() => this.bucleJuego());
   }
 
   verificarColisiones() {
