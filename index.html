@@ -28,6 +28,23 @@
         </div>
     </div>
 
+    <div class="landscape-hud">
+        <span class="hud-score-label">Puntaje</span>
+        <span class="hud-score-value" id="hud-score">0</span>
+        <div class="hud-hearts">
+            <span class="hud-heart" id="hud-heart-1">&#9829;</span>
+            <span class="hud-heart" id="hud-heart-2">&#9829;</span>
+            <span class="hud-heart" id="hud-heart-3">&#9829;</span>
+        </div>
+        <div class="hud-balas">
+            <div class="hud-bala active" id="hud-bala-1"></div>
+            <div class="hud-bala active" id="hud-bala-2"></div>
+            <div class="hud-bala active" id="hud-bala-3"></div>
+            <div class="hud-bala active" id="hud-bala-4"></div>
+            <div class="hud-bala active" id="hud-bala-5"></div>
+        </div>
+    </div>
+
     <div class="mobile-controls">
         <div class="mc-left">
             <button class="mc-btn" id="m-izq">&lt;</button>
@@ -52,9 +69,9 @@
             <div class="game-lives">
                 <span class="ui-label">VIDAS:</span>
                 <div class="lives-hearts">
-                    <div class="heart" id="heart-1">♥</div>
-                    <div class="heart" id="heart-2">♥</div>
-                    <div class="heart" id="heart-3">♥</div>
+                    <div class="heart" id="heart-1">&#9829;</div>
+                    <div class="heart" id="heart-2">&#9829;</div>
+                    <div class="heart" id="heart-3">&#9829;</div>
                 </div>
             </div>
             <div class="game-balas">
@@ -84,7 +101,6 @@
         </div>
     </div>
 
-
     <script src="modules/colisiones/particula.model.js"></script>
     <script src="modules/colisiones/particulaRectangular.svg.js"></script>
     <script src="modules/colisiones/particulaRedonda.svg.js"></script>
@@ -104,6 +120,11 @@
     <script src="modules/score/score.view.js"></script>
     <script src="modules/score/leaderboard.model.js"></script>
     <script src="modules/score/leaderboard.view.js"></script>
+    <script src="modules/pantallaJuego/pantallaJuego.model.js"></script>
+    <script src="modules/pantallaJuego/pantallaJuego.view.js"></script>
+    <script src="modules/colisiones/colisiones.controller.js"></script>
+    <script src="modules/pantallaJuego/controlesMovil.controller.js"></script>
+    <script src="modules/pantallaJuego/leaderboardUI.controller.js"></script>
     <script src="modules/pantallaJuego/pantallaJuego.js"></script>
     <script src="modules/main.js"></script>
 </body>
