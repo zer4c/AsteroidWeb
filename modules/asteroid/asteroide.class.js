@@ -16,24 +16,17 @@ class AsteroideController {
 
     let x;
     let y;
-    if (Math.random() < 0.5) {
-      x =
-        Math.random() < 0.5
-          ? Math.random() * minX
-          : maxX + Math.random() * (this.canvas.width - maxX);
-      y = Math.random() * this.canvas.height;
+    let rand = Math.random();
+    if (rand < 0.5) {
+      x = rand < 0.5 ? rand * minX : maxX + rand * (this.canvas.width - maxX);
+      y = rand * this.canvas.height;
     } else {
-      x = Math.random() * this.canvas.width;
-      y =
-        Math.random() < 0.5
-          ? Math.random() * minY
-          : maxY + Math.random() * (this.canvas.height - maxY);
+      x = rand * this.canvas.width;
+      y = rand < 0.5 ? rand * minY : maxY + rand * (this.canvas.height - maxY);
     }
 
-    const vx =
-      x < this.canvas.width / 2 ? Math.random() * 5 : Math.random() * -5;
-    const vy =
-      y <= this.canvas.height / 2 ? Math.random() * 5 : Math.random() * -5;
+    const vx = x < this.canvas.width / 2 ? Math.random() * 5 : rand * -5;
+    const vy = y <= this.canvas.height / 2 ? Math.random() * 5 : rand * -5;
 
     return { x, y, vx, vy };
   }

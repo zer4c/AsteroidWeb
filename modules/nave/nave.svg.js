@@ -45,7 +45,7 @@ class NaveSVG {
     ctx.lineTo(-20 * s, 55 * s);
     ctx.lineTo(-35 * s, flameLength);
     ctx.closePath();
-    ctx.strokeStyle = moviendoAdelante ? "#ffa500" : "white";
+    ctx.strokeStyle = moviendoAdelante ? "orange" : "white";
     ctx.lineWidth = moviendoAdelante ? 1.5 : 1;
     ctx.stroke();
 
@@ -55,7 +55,7 @@ class NaveSVG {
     ctx.lineTo(15 * s, 55 * s);
     ctx.lineTo(0, flameLength);
     ctx.closePath();
-    ctx.strokeStyle = moviendoAdelante ? "#ff6347" : "white";
+    ctx.strokeStyle = moviendoAdelante ? "red" : "white";
     ctx.lineWidth = moviendoAdelante ? 1.5 : 1;
     ctx.stroke();
 
@@ -64,7 +64,7 @@ class NaveSVG {
     ctx.lineTo(20 * s, 55 * s);
     ctx.lineTo(35 * s, flameLength);
     ctx.closePath();
-    ctx.strokeStyle = moviendoAdelante ? "#ffa500" : "white";
+    ctx.strokeStyle = moviendoAdelante ? "orange" : "white";
     ctx.lineWidth = moviendoAdelante ? 1.5 : 1;
     ctx.stroke();
 
